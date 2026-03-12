@@ -9,6 +9,20 @@
   },
   "favicon": "/favicon.ico",
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Website",
+          "icon": "browser",
+          "href": "https://openclawcode.org"
+        },
+        {
+          "anchor": "GitHub",
+          "icon": "message-code",
+          "href": "https://github.com/damoahdominic/occ"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "Documentation",
@@ -30,21 +44,7 @@
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Website",
-          "href": "https://openclawcode.org",
-          "icon": "globe"
-        },
-        {
-          "anchor": "GitHub",
-          "href": "https://github.com/damoahdominic/occ",
-          "icon": "github"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.png",
