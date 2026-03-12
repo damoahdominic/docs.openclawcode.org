@@ -1,47 +1,51 @@
 ---
 title: "Authentication"
+sidebarTitle: "Authentication"
+icon: "lock"
 description: "How OCCode handles sign-in and keeps your account secure."
 ---
 
-## Overview
+## Sign-in options
 
-OCCode uses secure token-based authentication through the `occ.mba.sh` cloud service. There are two ways to sign in:
+| Method | Best for |
+|--------|----------|
+| **Google** | Fastest — one click and you're in |
+| **Email + Password** | If you prefer not to use Google |
 
-| Method | How it works |
-|--------|------|
-| **Google** | One-click sign-in — recommended for most users |
-| **Email + Password** | Traditional sign-up with your email and a password |
+Both are equally secure. Most people use Google.
 
-Both methods are equally secure. Google sign-in is just faster.
+---
 
-## How Sign-In Works
-
-Here's what happens when you sign in from OCCode:
+## How sign-in works
 
 <Steps>
-  <Step title="OCCode opens your browser">
-    The app opens a secure sign-in page at `occ.mba.sh`.
+  <Step title="OCCode opens your browser" icon="arrow-up-right-from-square">
+    The app opens a secure sign-in page automatically.
   </Step>
-  <Step title="You sign in">
-    Choose Google or enter your email + password.
+  <Step title="You sign in" icon="right-to-bracket">
+    Choose Google or enter your email and password.
   </Step>
-  <Step title="Browser redirects back">
-    After signing in, the browser sends you back to OCCode automatically using a secure link (`occode://openclaw.home/auth`).
+  <Step title="Redirected back to OCCode" icon="rotate-left">
+    After signing in, your browser sends you back to the app via a secure link.
   </Step>
-  <Step title="You're signed in">
-    OCCode stores your session locally. You won't need to sign in again unless you explicitly log out.
+  <Step title="You're signed in" icon="circle-check">
+    Your session is stored locally. You won't need to sign in again unless you log out.
   </Step>
 </Steps>
 
-<Info>
-  The `occode://openclaw.home` link is a custom protocol registered by the OCCode app. It's how the browser securely hands your session back to the desktop app.
-</Info>
+---
 
-## Google Sign-In
+## Google sign-in
 
-The fastest way to get started. Click "Continue with Google," pick your Google account, and you're in. Your name and profile picture are imported automatically.
+The fastest way to get started:
 
-## Email + Password
+1. Click **"Continue with Google"**
+2. Pick your Google account
+3. You're in — your name and profile picture are imported automatically
+
+---
+
+## Email + password
 
 For users who prefer not to use Google:
 
@@ -49,21 +53,38 @@ For users who prefer not to use Google:
 2. **Log in** with the same credentials anytime
 
 <Warning>
-  There is currently no password reset flow. If you forget your password, you can sign in with Google instead — if you use the same email address, the accounts are linked automatically.
+  There is currently no password reset flow. If you forget your password, you can sign in with Google instead — if you use the same email, the accounts are linked automatically.
 </Warning>
 
-## Managing Your Account
+---
 
-Visit the [dashboard](https://occ.mba.sh/dashboard) to see your account details, including:
+## Managing your account
 
-- Your name and email
-- Credit balance
-- Usage history
+Visit the [dashboard](https://occ.mba.sh/dashboard) to see your account details:
+
+<CardGroup cols={3}>
+  <Card title="Profile" icon="user">
+    Your name and email.
+  </Card>
+  <Card title="Balance" icon="wallet">
+    Your current credit balance.
+  </Card>
+  <Card title="History" icon="clock-rotate-left">
+    Usage and purchase history.
+  </Card>
+</CardGroup>
 
 To **sign out**, click the sign-out button in the dashboard sidebar or within OCCode.
 
+---
+
 ## Security
 
-- Passwords are hashed with **bcrypt** — we never store your plain-text password
-- Sessions use **JWT tokens** sent over HTTPS
-- All communication between OCCode and the cloud service is encrypted
+<CardGroup cols={2}>
+  <Card title="Encrypted passwords" icon="shield-halved">
+    Passwords are hashed with bcrypt — we never store your plain-text password.
+  </Card>
+  <Card title="Secure connections" icon="lock">
+    All communication is encrypted over HTTPS.
+  </Card>
+</CardGroup>

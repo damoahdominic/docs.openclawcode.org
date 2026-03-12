@@ -1,95 +1,104 @@
 ---
 title: "Billing & Credits"
-description: "How OCCode's simple credit system works — pay as you go, no subscriptions."
+sidebarTitle: "Billing & Credits"
+icon: "credit-card"
+description: "Simple pay-as-you-go credits — no subscriptions, no surprises."
 ---
 
-## How Credits Work
-
-OCCode uses a simple **prepaid credit system**. You load credits into your account, and they're used as you interact with your AI agent.
+## How credits work
 
 <Steps>
-  <Step title="Sign up">
+  <Step title="Sign up" icon="user-plus">
     Every new account starts with **$5.00 in free credits** — no credit card required.
   </Step>
-  <Step title="Use your agent">
+  <Step title="Use your agent" icon="robot">
     Each interaction with your AI agent uses a small amount of credits.
   </Step>
-  <Step title="Top up when needed">
-    When your balance runs low, buy more credits from the dashboard.
+  <Step title="Top up when needed" icon="cart-shopping">
+    When your balance runs low, buy more from your dashboard.
   </Step>
 </Steps>
 
+---
+
 ## Pricing
 
-Simple, flat pricing. No subscriptions, no hidden fees, no surprises:
+Simple, flat pricing. No subscriptions, no hidden fees:
 
 | Credits | Price |
 |---------|-------|
-| $5.00 | $5 |
-| $10.00 | $10 |
-| $20.00 | $20 |
-| $50.00 | $50 |
+| $5 | $5 |
+| $10 | $10 |
+| $20 | $20 |
+| $50 | $50 |
 
-<Info>
-  Credits never expire. Use them whenever you want, at your own pace.
-</Info>
+<Info>Credits never expire. Use them at your own pace.</Info>
 
-## How Far Do Credits Go?
+---
 
-Your credits are used based on how much your AI agent processes. Here's a rough guide:
+## How far do credits go?
 
-| What you're doing | Approximate cost | How many with $5 |
-|-------------------|-----------------|-------------------|
-| Quick questions | ~$0.001 each | ~5,000 |
-| Moderate tasks | ~$0.003 each | ~1,600 |
-| Longer conversations | ~$0.01 each | ~500 |
-| Complex tasks | ~$0.05 each | ~100 |
+| What you're doing | Cost per interaction | How many with $5 |
+|-------------------|---------------------|-------------------|
+| Quick questions | ~$0.001 | ~5,000 |
+| Moderate tasks | ~$0.003 | ~1,600 |
+| Longer conversations | ~$0.01 | ~500 |
+| Complex tasks | ~$0.05 | ~100 |
 
 Most people find that **$5 lasts a long time** for everyday use.
 
-## Buying Credits
+---
 
-### From the Dashboard
+## Buying credits
 
-1. Go to [occ.mba.sh/dashboard](https://occ.mba.sh/dashboard)
-2. Click **Credits** in the sidebar
-3. Pick a credit amount ($5 / $10 / $20 / $50)
-4. Complete payment via **Stripe** — fast, secure checkout
-5. Credits are added to your account instantly
+<Steps>
+  <Step title="Go to your dashboard" icon="chart-line">
+    Visit [your dashboard](https://occ.mba.sh/dashboard) and click **Credits** in the sidebar.
+  </Step>
+  <Step title="Pick an amount" icon="hand-pointer">
+    Choose $5, $10, $20, or $50.
+  </Step>
+  <Step title="Pay securely" icon="lock">
+    Complete checkout via Stripe — accepts cards, Apple Pay, and Google Pay.
+  </Step>
+  <Step title="Credits added instantly" icon="circle-check">
+    Your balance updates immediately. Start using your agent right away.
+  </Step>
+</Steps>
 
-### Accepted Payment Methods
+---
 
-Stripe supports:
-- Credit and debit cards (Visa, Mastercard, Amex)
-- Apple Pay and Google Pay
-- Bank transfers (select regions)
+## What happens when credits run out?
 
-## Checking Your Balance
+When your balance reaches $0:
 
-### In the Dashboard
+<CardGroup cols={2}>
+  <Card title="Agent pauses" icon="pause">
+    Your AI agent can't process new requests until you top up.
+  </Card>
+  <Card title="Nothing is lost" icon="shield-halved">
+    Just add credits and pick up where you left off. Everything else keeps working.
+  </Card>
+</CardGroup>
 
-The [dashboard](https://occ.mba.sh/dashboard) shows your current balance front and center on the **Overview** page, along with your total usage and request count.
+---
 
-### In OCCode
+## Checking your balance
 
-Your balance is shown within the app and updates automatically.
+<CardGroup cols={2}>
+  <Card title="In the dashboard" icon="chart-line">
+    Your balance is shown front and center on the Overview page.
+  </Card>
+  <Card title="In OCCode" icon="display">
+    Your balance is visible within the app and updates automatically.
+  </Card>
+</CardGroup>
 
-## What Happens When Credits Run Out?
+---
 
-When your balance reaches **$0.00**:
+## History
 
-- Your AI agent pauses — it can't process new requests
-- You'll see a prompt to add credits
-- **Nothing is lost** — just top up and pick up where you left off
-- OCCode itself continues to work normally
+Your [dashboard](https://occ.mba.sh/dashboard) keeps a complete record:
 
-## Viewing Your History
-
-The dashboard keeps a complete record:
-
-- **Usage** page — every interaction, with cost and timestamp
-- **Credits** page — every purchase, with amount and date
-
-<Card title="Open Dashboard" icon="chart-line" href="https://occ.mba.sh/dashboard">
-  Check your balance and manage billing.
-</Card>
+- **Usage** — every interaction, with cost and timestamp
+- **Credits** — every purchase, with amount and date

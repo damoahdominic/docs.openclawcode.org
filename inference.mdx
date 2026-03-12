@@ -1,71 +1,79 @@
 ---
 title: "How It Works"
-description: "How OCCode connects you to your OpenClaw AI agent behind the scenes."
+sidebarTitle: "How It Works"
+icon: "bolt"
+description: "What happens behind the scenes when you use your OpenClaw agent through OCCode."
 ---
 
-## The Big Picture
+## The big picture
 
-When you use OCCode, the app communicates with your AI agent through a cloud service that handles authentication and billing automatically. You don't need to configure anything — it just works.
+When you interact with your AI agent through OCCode, everything is handled automatically behind the scenes. You don't need to configure anything.
 
 ```
-Your Computer                    Cloud                        AI
-┌──────────┐              ┌──────────────┐             ┌──────────┐
-│  OCCode  │─── request ──▶  occ.mba.sh  │── forward ──▶  Agent   │
-│   App    │◀── response ─│  (gateway)   │◀── reply ───│ (OpenClaw)│
-└──────────┘              └──────────────┘             └──────────┘
-                           ✓ Checks your login
-                           ✓ Checks your credits
-                           ✓ Deducts usage cost
+  You  ──▶  OCCode App  ──▶  Cloud Service  ──▶  Your AI Agent
+                              ✓ Verifies you
+                              ✓ Checks credits
+                              ✓ Deducts usage
 ```
 
-## What Happens When You Use Your Agent
+---
+
+## Step by step
 
 <Steps>
-  <Step title="You make a request">
-    You interact with your AI agent through OCCode — ask it a question, give it a task, or check on something.
+  <Step title="You interact with your agent" icon="message">
+    Ask a question, give a task, or check on something through OCCode.
   </Step>
-  <Step title="OCCode sends it to the cloud">
-    The request goes to `occ.mba.sh`, which verifies your account and checks that you have enough credits.
+  <Step title="OCCode sends it securely" icon="paper-plane">
+    Your request goes to the cloud service, which verifies your account and checks your credits.
   </Step>
-  <Step title="Your agent responds">
-    The request is forwarded to your OpenClaw AI agent, which processes it and sends back a response.
+  <Step title="Your agent responds" icon="robot">
+    The request reaches your OpenClaw AI agent, which processes it and sends back a response.
   </Step>
-  <Step title="Credits are deducted">
-    A small amount is deducted from your credit balance based on how much the agent processed.
+  <Step title="Credits are deducted" icon="coins">
+    A small amount is deducted from your balance based on how much the agent processed.
   </Step>
 </Steps>
 
-## Available Models
+---
 
-Your agent uses state-of-the-art AI models behind the scenes. You don't need to choose or configure them — OCCode picks the best option automatically.
+## Available models
+
+Your agent uses state-of-the-art AI models behind the scenes. You don't need to choose or configure them — OCCode handles it automatically.
 
 | Model | Description |
 |-------|-------------|
-| **MoltPilot** | Fast, capable, cost-efficient — great for everyday tasks |
+| **MoltPilot** | Fast, capable, and cost-efficient — great for everyday tasks |
 
-<Info>More models will be added over time. The experience stays the same — OCCode handles model selection for you.</Info>
+<Info>More models will be added over time. The experience stays the same.</Info>
 
-## Usage Costs
+---
 
-Each interaction with your agent uses a small amount of credits based on how much text is processed:
+## How much does it cost?
 
-| Activity | Approximate Cost |
-|----------|-----------------|
+Each interaction uses a tiny amount of credits:
+
+| What you're doing | Approximate cost |
+|-------------------|-----------------|
 | Quick question | ~$0.001 |
 | Moderate task | ~$0.003 |
 | Longer conversation | ~$0.01 |
 | Complex task | ~$0.05 |
 
-With **$5 in free credits**, you can have thousands of interactions with your agent.
+With **$5 in free credits**, you can have **thousands of interactions** with your agent.
 
-## What If Something Goes Wrong?
+---
 
-| What you see | What it means | What to do |
-|-------------|---------------|------------|
-| "Credits depleted" | Your balance is $0 | [Top up credits](https://occ.mba.sh/dashboard) |
-| "Session expired" | You need to sign in again | Sign in through OCCode |
-| "Service unavailable" | Temporary cloud issue | Wait a moment and try again |
+## Troubleshooting
 
-<Card title="Check Your Usage" icon="chart-line" href="https://occ.mba.sh/dashboard">
-  View your balance and see a full breakdown of your agent usage.
-</Card>
+<AccordionGroup>
+  <Accordion icon="wallet" title="'Credits depleted' message">
+    Your balance is $0. Visit your [dashboard](https://occ.mba.sh/dashboard) to buy more credits — your agent will resume immediately.
+  </Accordion>
+  <Accordion icon="right-to-bracket" title="'Session expired' message">
+    You need to sign in again. OCCode will prompt you — just follow the sign-in flow.
+  </Accordion>
+  <Accordion icon="triangle-exclamation" title="'Service unavailable' message">
+    This is a temporary issue on our end. Wait a moment and try again — it usually resolves quickly.
+  </Accordion>
+</AccordionGroup>
