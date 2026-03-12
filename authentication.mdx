@@ -1,100 +1,69 @@
 ---
 title: "Authentication"
-description: "How OCCode handles sign-in, tokens, and the deep-link auth flow."
+description: "How OCCode handles sign-in and keeps your account secure."
 ---
 
 ## Overview
 
-OCCode uses **JWT-based authentication** with the `occ.mba.sh` API gateway. There are two sign-in methods:
+OCCode uses secure token-based authentication through the `occ.mba.sh` cloud service. There are two ways to sign in:
 
-| Method | Flow |
+| Method | How it works |
 |--------|------|
-| **Google OAuth** | One-click via Google — recommended |
-| **Email + Password** | Traditional sign-up with email and password |
+| **Google** | One-click sign-in — recommended for most users |
+| **Email + Password** | Traditional sign-up with your email and a password |
 
-Both methods issue a JWT token that the editor stores locally and sends with every API request.
+Both methods are equally secure. Google sign-in is just faster.
 
-## Auth Flow
+## How Sign-In Works
 
 Here's what happens when you sign in from OCCode:
 
-```
-OCCode Editor                    Browser                     occ.mba.sh
-     │                              │                            │
-     │── opens browser ────────────▶│                            │
-     │                              │── GET /api/v1/auth/google ▶│
-     │                              │                            │── redirects to Google
-     │                              │◀── Google callback ────────│
-     │                              │                            │── creates/finds user
-     │                              │                            │── issues JWT
-     │                              │◀── /auth/callback?token=… ─│
-     │                              │                            │
-     │◀── occode://openclaw.home ───│                            │
-     │    /auth?token=…&balance=…   │                            │
-     │                              │                            │
-     │── stores token locally       │                            │
-     │── ready to make requests     │                            │
-```
+<Steps>
+  <Step title="OCCode opens your browser">
+    The app opens a secure sign-in page at `occ.mba.sh`.
+  </Step>
+  <Step title="You sign in">
+    Choose Google or enter your email + password.
+  </Step>
+  <Step title="Browser redirects back">
+    After signing in, the browser sends you back to OCCode automatically using a secure link (`occode://openclaw.home/auth`).
+  </Step>
+  <Step title="You're signed in">
+    OCCode stores your session locally. You won't need to sign in again unless you explicitly log out.
+  </Step>
+</Steps>
 
 <Info>
-The `occode://openclaw.home` deep link is a custom protocol registered by the OCCode desktop app. It receives the JWT token and balance directly from the browser after authentication.
+  The `occode://openclaw.home` link is a custom protocol registered by the OCCode app. It's how the browser securely hands your session back to the desktop app.
 </Info>
 
-## Token Details
+## Google Sign-In
 
-| Property | Value |
-|----------|-------|
-| Format | JWT (JSON Web Token) |
-| Signing | HS256 with server secret |
-| Expiry | Set by server configuration |
-| Storage | `localStorage` in dashboard; local storage in editor |
-| Sent as | `Authorization: Bearer <token>` header |
-
-## API Authentication
-
-Every API request to `occ.mba.sh` requires a valid JWT:
-
-```bash
-curl https://occ.mba.sh/api/v1/me \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
-Response:
-```json
-{
-  "id": "uuid",
-  "email": "you@example.com",
-  "name": "Your Name",
-  "balance_usd": "4.250000",
-  "picture": "https://..."
-}
-```
-
-If the token is invalid or expired, the API returns `401 Unauthorized`.
-
-## Google OAuth
-
-OCCode uses Google's OAuth 2.0 consent flow. The redirect URI is:
-
-```
-https://occ.mba.sh/api/v1/auth/google/callback
-```
-
-The `state` parameter carries context (like `ref=occ-editor`) so the server knows to redirect back to the editor after authentication.
+The fastest way to get started. Click "Continue with Google," pick your Google account, and you're in. Your name and profile picture are imported automatically.
 
 ## Email + Password
 
 For users who prefer not to use Google:
 
-<Steps>
-  <Step title="Sign up">
-    `POST /api/v1/auth/signup` with `email` and `password` (min 8 characters). Passwords are hashed with bcrypt.
-  </Step>
-  <Step title="Log in">
-    `POST /api/v1/auth/login` with credentials. Returns a JWT token.
-  </Step>
-</Steps>
+1. **Sign up** with your email and a password (minimum 8 characters)
+2. **Log in** with the same credentials anytime
 
 <Warning>
-  There is currently no password reset flow. If you forget your password, sign in with Google instead (if you used the same email, the accounts are linked).
+  There is currently no password reset flow. If you forget your password, you can sign in with Google instead — if you use the same email address, the accounts are linked automatically.
 </Warning>
+
+## Managing Your Account
+
+Visit the [dashboard](https://occ.mba.sh/dashboard) to see your account details, including:
+
+- Your name and email
+- Credit balance
+- Usage history
+
+To **sign out**, click the sign-out button in the dashboard sidebar or within OCCode.
+
+## Security
+
+- Passwords are hashed with **bcrypt** — we never store your plain-text password
+- Sessions use **JWT tokens** sent over HTTPS
+- All communication between OCCode and the cloud service is encrypted

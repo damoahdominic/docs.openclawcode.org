@@ -22,7 +22,7 @@
             ]
           },
           {
-            "group": "Using OCCode",
+            "group": "How OCCode Works",
             "pages": [
               "inference",
               "billing"

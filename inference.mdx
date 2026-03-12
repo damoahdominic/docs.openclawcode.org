@@ -1,127 +1,71 @@
 ---
-title: "Inference"
-description: "How AI requests flow from OCCode through the API gateway to language models."
+title: "How It Works"
+description: "How OCCode connects you to your OpenClaw AI agent behind the scenes."
 ---
 
-## Request Flow
+## The Big Picture
 
-When you use AI features in OCCode, here's what happens:
-
-```
-OCCode Editor
-    │
-    │  POST /v1/chat/completions
-    │  Authorization: Bearer <jwt>
-    │  { model, messages, stream }
-    ▼
-occ.mba.sh (API Gateway)
-    │
-    │  1. Validates JWT token
-    │  2. Checks credit balance (402 if empty)
-    │  3. Forwards to inference backend
-    │  4. Deducts credits based on token usage
-    ▼
-LiteLLM (inference.mba.sh)
-    │
-    │  Routes to best available model
-    ▼
-OpenRouter → AI Model
-```
-
-## Endpoint
-
-The inference endpoint is **OpenAI-compatible**:
+When you use OCCode, the app communicates with your AI agent through a cloud service that handles authentication and billing automatically. You don't need to configure anything — it just works.
 
 ```
-POST https://occ.mba.sh/v1/chat/completions
+Your Computer                    Cloud                        AI
+┌──────────┐              ┌──────────────┐             ┌──────────┐
+│  OCCode  │─── request ──▶  occ.mba.sh  │── forward ──▶  Agent   │
+│   App    │◀── response ─│  (gateway)   │◀── reply ───│ (OpenClaw)│
+└──────────┘              └──────────────┘             └──────────┘
+                           ✓ Checks your login
+                           ✓ Checks your credits
+                           ✓ Deducts usage cost
 ```
 
-### Request
+## What Happens When You Use Your Agent
 
-```bash
-curl https://occ.mba.sh/v1/chat/completions \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "moltpilot",
-    "messages": [
-      {"role": "user", "content": "Write a Python hello world"}
-    ],
-    "stream": true
-  }'
-```
-
-### Response (non-streaming)
-
-```json
-{
-  "id": "chatcmpl-abc123",
-  "object": "chat.completion",
-  "choices": [{
-    "message": {
-      "role": "assistant",
-      "content": "print('Hello, World!')"
-    }
-  }],
-  "usage": {
-    "prompt_tokens": 12,
-    "completion_tokens": 8,
-    "total_tokens": 20
-  }
-}
-```
-
-### Streaming
-
-When `stream: true`, responses are sent as **Server-Sent Events (SSE)**. The final chunk includes usage data for credit deduction.
+<Steps>
+  <Step title="You make a request">
+    You interact with your AI agent through OCCode — ask it a question, give it a task, or check on something.
+  </Step>
+  <Step title="OCCode sends it to the cloud">
+    The request goes to `occ.mba.sh`, which verifies your account and checks that you have enough credits.
+  </Step>
+  <Step title="Your agent responds">
+    The request is forwarded to your OpenClaw AI agent, which processes it and sends back a response.
+  </Step>
+  <Step title="Credits are deducted">
+    A small amount is deducted from your credit balance based on how much the agent processed.
+  </Step>
+</Steps>
 
 ## Available Models
 
-List available models:
+Your agent uses state-of-the-art AI models behind the scenes. You don't need to choose or configure them — OCCode picks the best option automatically.
 
-```bash
-curl https://occ.mba.sh/v1/models \
-  -H "Authorization: Bearer YOUR_TOKEN"
-```
+| Model | Description |
+|-------|-------------|
+| **MoltPilot** | Fast, capable, cost-efficient — great for everyday tasks |
 
-Currently available:
+<Info>More models will be added over time. The experience stays the same — OCCode handles model selection for you.</Info>
 
-| Model ID | Provider | Description |
-|----------|----------|-------------|
-| `moltpilot` | Z.AI via OpenRouter | GLM-4.7-Flash — fast, capable, cost-efficient |
+## Usage Costs
 
-<Info>More models (Claude, GPT-4, etc.) will be added over time. The endpoint and auth flow stay the same.</Info>
+Each interaction with your agent uses a small amount of credits based on how much text is processed:
 
-## Credit Deduction
+| Activity | Approximate Cost |
+|----------|-----------------|
+| Quick question | ~$0.001 |
+| Moderate task | ~$0.003 |
+| Longer conversation | ~$0.01 |
+| Complex task | ~$0.05 |
 
-Credits are deducted **per request** based on actual token usage:
+With **$5 in free credits**, you can have thousands of interactions with your agent.
 
-```
-cost = (tokens_in × $0.0000005 + tokens_out × $0.0000015) × markup
-```
+## What If Something Goes Wrong?
 
-| Factor | Value |
-|--------|-------|
-| Input token rate | $0.50 per 1M tokens |
-| Output token rate | $1.50 per 1M tokens |
-| Markup | Configurable (server-side) |
+| What you see | What it means | What to do |
+|-------------|---------------|------------|
+| "Credits depleted" | Your balance is $0 | [Top up credits](https://occ.mba.sh/dashboard) |
+| "Session expired" | You need to sign in again | Sign in through OCCode |
+| "Service unavailable" | Temporary cloud issue | Wait a moment and try again |
 
-- **Streaming requests**: Usage is extracted from the final SSE chunk
-- **Non-streaming requests**: Usage is read from the JSON response body
-- **Deduction is atomic**: Uses `GREATEST(0, balance - cost)` to prevent negative balances
-
-## Rate Limits
-
-| Limit | Value |
-|-------|-------|
-| Inference requests | 60 per minute per user |
-| Auth endpoints | Rate limited per IP |
-
-## Error Responses
-
-| Status | Meaning |
-|--------|---------|
-| `402` | Credit balance depleted. Top up at the [dashboard](https://occ.mba.sh/dashboard). |
-| `401` | Invalid or expired JWT token. Re-authenticate. |
-| `429` | Rate limit exceeded. Wait and retry. |
-| `502` | Upstream inference provider error. Retry after a moment. |
+<Card title="Check Your Usage" icon="chart-line" href="https://occ.mba.sh/dashboard">
+  View your balance and see a full breakdown of your agent usage.
+</Card>

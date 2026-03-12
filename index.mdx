@@ -1,66 +1,65 @@
 ---
 title: "Introduction"
-description: "OpenClaw Code (OCCode) is an AI-native, open-source code editor with built-in inference, billing, and a seamless coding experience."
+description: "OpenClaw Code (OCCode) is the easiest way to set up, manage, and troubleshoot your OpenClaw AI agent — no technical knowledge required."
 ---
 
 ## What is OpenClaw Code?
 
-OpenClaw Code (OCCode) is an open-source code editor built for AI-first development. It's a fork of [Void](https://github.com/voideditor/void) — itself a VS Code fork with a built-in AI coding agent — extended with OpenClaw's infrastructure for authentication, credit-based billing, and managed inference.
+OpenClaw Code (OCCode) is a desktop app that makes it easy to set up and manage your [OpenClaw](https://openclaw.ai) AI agent. No terminal, no config files, no technical knowledge required.
 
-You write code. OCCode handles the AI.
+Download it, sign in, and your agent is ready to go.
 
 <CardGroup cols={2}>
   <Card title="Get started in 2 minutes" icon="rocket" href="/quickstart">
-    Download, sign in, and start coding with AI — no API keys needed.
+    Download, sign in, and get your agent running.
   </Card>
-  <Card title="How inference works" icon="bolt" href="/inference">
-    Understand how requests flow from your editor to AI models.
+  <Card title="How it works" icon="bolt" href="/inference">
+    Understand how OCCode connects to your AI agent.
   </Card>
   <Card title="Authentication" icon="lock" href="/authentication">
-    Google OAuth and email/password sign-in options.
+    Google sign-in or email — your choice.
   </Card>
   <Card title="Billing & Credits" icon="credit-card" href="/billing">
-    Pay-as-you-go credits with flat top-up pricing.
+    Pay-as-you-go credits with simple flat pricing.
   </Card>
 </CardGroup>
 
-## Architecture
+## How It Works
 
-OCCode is composed of three parts:
+OCCode connects you to your OpenClaw AI agent through a simple flow:
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   OCCode Editor  │────▶│   occ.mba.sh    │────▶│  LLM Provider   │
-│   (Desktop App)  │     │   (API Gateway)  │     │  (via LiteLLM)  │
+│   OCCode App     │────▶│   occ.mba.sh    │────▶│   AI Agent      │
+│   (Your Desktop) │     │   (Cloud)        │     │   (OpenClaw)    │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
-     Your machine            Auth + Billing          AI Models
-                             Credit Deduction
+    Setup & Manage          Auth + Billing         Your AI Agent
 ```
 
-| Component | Description |
+| Component | What it does |
 |-----------|-------------|
-| **OCCode Editor** | Desktop app (Windows & macOS). VS Code-compatible with built-in AI chat, inline edits, and code generation. |
-| **occ.mba.sh** | API gateway. Handles authentication, credit wallet, Stripe billing, and proxies inference requests. |
-| **LiteLLM** | Inference router. Routes requests to the best available model via OpenRouter. |
+| **OCCode App** | Desktop app for Windows & macOS. Guides you through setting up your agent and managing it day-to-day. |
+| **occ.mba.sh** | Cloud service that handles your account, credits, and connects you to your agent. |
+| **OpenClaw Agent** | Your personal AI agent, powered by state-of-the-art language models. |
 
 ## Key Features
 
-- **No API keys required** — sign in and start using AI instantly
-- **$5 free credits** on signup — enough for thousands of requests
+- **No terminal needed** — everything is done through a friendly interface
+- **$5 free credits** on signup — enough to get started immediately
+- **Simple setup wizard** — get your agent running in minutes
 - **Pay-as-you-go** — top up $5 / $10 / $20 / $50 when you need more
-- **OpenAI-compatible API** — standard `/v1/chat/completions` endpoint
-- **Open source** — editor and backend are both on GitHub
+- **Open source** — the app and backend are both on GitHub
 
 ## Links
 
 <CardGroup cols={3}>
-  <Card title="Editor repo" icon="github" href="https://github.com/damoahdominic/occ">
-    OCCode desktop editor source code.
+  <Card title="Download OCCode" icon="download" href="https://openclawcode.org/#download">
+    Get the app for Windows or macOS.
   </Card>
-  <Card title="Backend repo" icon="github" href="https://github.com/damoahdominic/occ.mba.sh">
-    API gateway and billing backend.
+  <Card title="GitHub" icon="github" href="https://github.com/damoahdominic/occ">
+    OCCode source code.
   </Card>
   <Card title="Website" icon="globe" href="https://openclawcode.org">
-    Download links and marketing site.
+    Learn more at openclawcode.org.
   </Card>
 </CardGroup>

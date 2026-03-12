@@ -1,27 +1,27 @@
 ---
 title: "Billing & Credits"
-description: "How OCCode's credit system and Stripe-powered billing works."
+description: "How OCCode's simple credit system works — pay as you go, no subscriptions."
 ---
 
 ## How Credits Work
 
-OCCode uses a **prepaid credit system**. You load credits into your account, and they're deducted as you use AI features.
+OCCode uses a simple **prepaid credit system**. You load credits into your account, and they're used as you interact with your AI agent.
 
 <Steps>
   <Step title="Sign up">
-    Every new account starts with **$5.00 in free credits**.
+    Every new account starts with **$5.00 in free credits** — no credit card required.
   </Step>
-  <Step title="Use AI">
-    Each AI request (chat, inline edit, code generation) deducts a small amount based on tokens used.
+  <Step title="Use your agent">
+    Each interaction with your AI agent uses a small amount of credits.
   </Step>
-  <Step title="Top up">
+  <Step title="Top up when needed">
     When your balance runs low, buy more credits from the dashboard.
   </Step>
 </Steps>
 
 ## Pricing
 
-Simple, flat pricing — no subscriptions, no hidden fees:
+Simple, flat pricing. No subscriptions, no hidden fees, no surprises:
 
 | Credits | Price |
 |---------|-------|
@@ -31,33 +31,33 @@ Simple, flat pricing — no subscriptions, no hidden fees:
 | $50.00 | $50 |
 
 <Info>
-  Credits never expire. Use them whenever you want.
+  Credits never expire. Use them whenever you want, at your own pace.
 </Info>
 
-## How Much Do Things Cost?
+## How Far Do Credits Go?
 
-AI usage is metered by **tokens** — the units of text that language models process.
+Your credits are used based on how much your AI agent processes. Here's a rough guide:
 
-| Activity | Approximate Cost | Credits Used |
-|----------|-----------------|--------------|
-| Short question ("fix this bug") | ~500 tokens | ~$0.001 |
-| Code generation (function) | ~2,000 tokens | ~$0.003 |
-| Long conversation (10 messages) | ~10,000 tokens | ~$0.01 |
-| Large refactor | ~50,000 tokens | ~$0.05 |
+| What you're doing | Approximate cost | How many with $5 |
+|-------------------|-----------------|-------------------|
+| Quick questions | ~$0.001 each | ~5,000 |
+| Moderate tasks | ~$0.003 each | ~1,600 |
+| Longer conversations | ~$0.01 each | ~500 |
+| Complex tasks | ~$0.05 each | ~100 |
 
-With **$5 in free credits**, you can make roughly **5,000+ short requests** or **100+ substantial code generation sessions**.
+Most people find that **$5 lasts a long time** for everyday use.
 
 ## Buying Credits
 
 ### From the Dashboard
 
 1. Go to [occ.mba.sh/dashboard](https://occ.mba.sh/dashboard)
-2. Navigate to **Credits** in the sidebar
-3. Click a credit tier ($5 / $10 / $20 / $50)
-4. Complete payment via **Stripe Checkout**
+2. Click **Credits** in the sidebar
+3. Pick a credit amount ($5 / $10 / $20 / $50)
+4. Complete payment via **Stripe** — fast, secure checkout
 5. Credits are added to your account instantly
 
-### Payment Methods
+### Accepted Payment Methods
 
 Stripe supports:
 - Credit and debit cards (Visa, Mastercard, Amex)
@@ -68,44 +68,27 @@ Stripe supports:
 
 ### In the Dashboard
 
-The [dashboard](https://occ.mba.sh/dashboard) shows your current balance, total spent, and request count on the **Overview** page.
-
-### Via API
-
-```bash
-curl https://occ.mba.sh/api/v1/me \
-  -H "Authorization: Bearer YOUR_TOKEN"
-```
-
-The `balance_usd` field in the response shows your current credit balance.
+The [dashboard](https://occ.mba.sh/dashboard) shows your current balance front and center on the **Overview** page, along with your total usage and request count.
 
 ### In OCCode
 
-Your balance is passed to the editor during authentication via the deep link:
-
-```
-occode://openclaw.home/auth?token=<jwt>&balance=<amount>
-```
+Your balance is shown within the app and updates automatically.
 
 ## What Happens When Credits Run Out?
 
-When your balance hits **$0.00**:
+When your balance reaches **$0.00**:
 
-- AI requests return a **402 error** with a link to top up
-- The editor shows a prompt to add credits
-- All other editor features (editing, git, terminal) continue to work normally
-- **No data is lost** — you just can't make AI requests until you top up
+- Your AI agent pauses — it can't process new requests
+- You'll see a prompt to add credits
+- **Nothing is lost** — just top up and pick up where you left off
+- OCCode itself continues to work normally
 
-## Viewing Usage History
+## Viewing Your History
 
-The dashboard **Usage** page shows every AI request with:
+The dashboard keeps a complete record:
 
-- Model used
-- Input and output tokens
-- Cost deducted
-- Timestamp
-
-The **Credits** page shows your purchase history with amounts and dates.
+- **Usage** page — every interaction, with cost and timestamp
+- **Credits** page — every purchase, with amount and date
 
 <Card title="Open Dashboard" icon="chart-line" href="https://occ.mba.sh/dashboard">
   Check your balance and manage billing.
